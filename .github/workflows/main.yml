@@ -1,18 +1,24 @@
-name: "Tests"
+name: kind
+
 on:
   pull_request:
   push:
-    branches:
-      - master
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Build
+        run: |
           npm install
           npm run build
-      - uses: ./
-        with:
-          waitDuration: 60s
-          configFile: .github/kind-config.yaml
+
+      - name: Create cluster
+        uses: ./
+        id: kind
+
+      - name: Output
+        run: echo "${{ steps.kind.outputs.kubeConfigPath }}"

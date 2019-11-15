@@ -8,6 +8,8 @@ const ClusterNameInput = "clusterName";
 const WaitDurationInput = "waitDuration";
 const LogLevelInput = "logLevel";
 
+const KubeConfigPathOutput = "kubeConfigPath";
+
 export function createKind(): Kind {
     const version: string = core.getInput(VersionInput);
     const configFile: string = core.getInput(ConfigfileInput);
@@ -24,6 +26,8 @@ async function run() {
         const kind = createKind()
         await kind.install();
         await kind.createCluster();
+        const kubeConfigPath = await kind.getKubeConfigPath()
+        core.setOutput(KubeConfigPathOutput, kubeConfigPath)
     } catch (error) {
         core.setFailed(error.message);
     }

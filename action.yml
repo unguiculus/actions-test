@@ -14,6 +14,9 @@ inputs:
     description: "The duration to wait for the control plane to become ready"
   loglevel:
     description: "The loglevel for kind"
+outputs:
+  kubeConfigPath:
+    description: "The path to the kube config file"
 runs:
   using: "node12"
   main: "lib/main.js"

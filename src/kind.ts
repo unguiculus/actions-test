@@ -35,10 +35,28 @@ export class Kind {
     async createCluster() {
         console.log("creating kind cluster...");
 
-        const commandLine = this.createCommandLine();
-        console.log("kind commandline: kind " + commandLine.join(" "));
+        const commandline = this.createCommandLine();
+        console.log("kind commandline: kind " + commandline.join(" "));
 
-        await exec.exec("kind", commandLine);
+        await exec.exec("kind", commandline);
+    }
+
+    async getKubeConfigPath(): Promise<string> {
+        let output = '';
+
+        const options = {};
+        // @ts-ignore
+        options.listeners = {
+            stdout: (data: Buffer) => {
+                output += data.toString();
+            },
+        };
+
+        const commandline = ["get", "kubeconfig-path", "--name", this.clusterName];
+        console.log("kind commandline: kind " + commandline.join(" "));
+
+        await exec.exec("kind", commandline, options)
+        return output
     }
 
     private createCommandLine(): string[] {
