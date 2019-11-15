@@ -12,12 +12,13 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Build
+        working-directory: ./kind
         run: |
           npm install
           npm run build
 
       - name: Create cluster
-        uses: ./
+        uses: ./kind
         id: kind
 
       - name: Output

@@ -1,10 +1,9 @@
 .idea
 *.iml
 
-test/runner/*
-
 # comment out in distribution branches
 node_modules/
+lib/
 
-logs
+logs/
 *.log*

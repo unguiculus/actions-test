@@ -35,36 +35,9 @@ export class Kind {
     async createCluster() {
         console.log("creating kind cluster...");
 
-        const commandline = this.createCommandLine();
-        console.log("kind commandline: kind " + commandline.join(" "));
-
-        await exec.exec("kind", commandline);
-    }
-
-    async getKubeConfigPath(): Promise<string> {
-        let output = '';
-
-        const options = {};
-        // @ts-ignore
-        options.listeners = {
-            stdout: (data: Buffer) => {
-                output += data.toString();
-            },
-        };
-
-        const commandline = ["get", "kubeconfig-path", "--name", this.clusterName];
-        console.log("kind commandline: kind " + commandline.join(" "));
-
-        await exec.exec("kind", commandline, options)
-        return output
-    }
-
-    private createCommandLine(): string[] {
         let args: string[] = ["create", "cluster"];
         if (this.configFile !== "") {
-            const workspace: string = process.env[`GITHUB_WORKSPACE`] || "";
-            const cfgPath: string = path.join(workspace, this.configFile);
-            args.push("--config", cfgPath);
+            args.push("--config", this.configFile);
         }
         if (this.nodeImage !== "") {
             args.push("--image", this.nodeImage);
@@ -78,6 +51,28 @@ export class Kind {
         if (this.logLevel !== "") {
             args.push("--loglevel", this.logLevel)
         }
-        return args;
+        console.log("kind command-line: kind " + args.join(" "));
+
+        await exec.exec("kind", args);
+    }
+
+    async getKubeConfigPath(): Promise<string> {
+        console.log("getting kube config path...");
+
+        let output = '';
+
+        const options = {};
+        // @ts-ignore
+        options.listeners = {
+            stdout: (data: Buffer) => {
+                output += data.toString();
+            },
+        };
+
+        const args = ["get", "kubeconfig-path", "--name", this.clusterName];
+        console.log("kind command-line: kind " + args.join(" "));
+
+        await exec.exec("kind", args, options);
+        return output
     }
 }
