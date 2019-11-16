@@ -1,4 +1,4 @@
-name: kind
+name: chart actions
 
 on:
   pull_request:
@@ -11,8 +11,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Build
+      - name: Build kind action
         working-directory: ./kind
+        run: |
+          npm install
+          npm run build
+
+      - name: Build chart-testing action
+        working-directory: ./chart-testing
         run: |
           npm install
           npm run build
@@ -21,5 +27,8 @@ jobs:
         uses: ./kind
         id: kind
 
-      - name: Output
-        run: echo "${{ steps.kind.outputs.kubeConfigPath }}"
+      - name: Run chart-testing
+        uses: ./chart-testing
+        with:
+          command: version
+          kubeconfigFile: "${{ steps.kind.outputs.kubeConfigPath }}"
