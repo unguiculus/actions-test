@@ -26,9 +26,10 @@ jobs:
       - name: Create cluster
         uses: ./kind
         id: kind
+        with:
+          installLocalPathProvisioner: true
 
       - name: Run chart-testing
         uses: ./chart-testing
         with:
           command: version
-          kubeconfigFile: "${{ steps.kind.outputs.kubeConfigPath }}"
