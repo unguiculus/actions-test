@@ -23,9 +23,14 @@ jobs:
           npm install
           npm run build
 
+      - name: Build chart-releaser action
+        working-directory: ./chart-releaser
+        run: |
+          npm install
+          npm run build
+
       - name: Create cluster
         uses: ./kind
-        id: kind
         with:
           installLocalPathProvisioner: true
 
@@ -33,3 +38,8 @@ jobs:
         uses: ./chart-testing
         with:
           command: version
+
+      - name: Run chart-releaser
+        uses: ./chart-releaser
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
