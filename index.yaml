@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  demo:
+  - apiVersion: v1
+    created: "2019-11-22T14:59:48.120293275Z"
+    description: A Helm chart for Kubernetes
+    digest: a62b2af93deaf452a38264e170ca804d06b6f2eeb5f50d546091ed44a05b0cc5
+    name: demo
+    urls:
+    - https://github.com/unguiculus/actions-test/releases/download/demo-0.1.0/demo-0.1.0.tgz
+    version: 0.1.0
+generated: "2019-11-22T14:59:47.974587647Z"
