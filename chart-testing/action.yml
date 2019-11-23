@@ -7,7 +7,7 @@ inputs:
   config:
     description: "The path to the chart-testing config file"
   command:
-    description: "The chart-testing command to run "
+    description: "The chart-testing command to run"
     required: true
   kubeconfig:
     description: "The path to the kube config file"
