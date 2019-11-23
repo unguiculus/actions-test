@@ -3,9 +3,9 @@ entries:
   demo:
   - apiVersion: v1
     appVersion: latest
-    created: "2019-11-23T15:54:26.0217274Z"
+    created: "2019-11-23T16:00:41.184483897Z"
     description: A Helm chart for Kubernetes
-    digest: 05152e95534687613aa88629fb4fd3abd062d7283ba0ae997dd8c4db60751559
+    digest: 1c89bcd03d07679bc60a28802baaf294d35fb6929d82daf1fe12983d3ec5e31f
     home: some home
     maintainers:
     - email: text@example.com
@@ -14,4 +14,4 @@ entries:
     urls:
     - https://github.com/unguiculus/actions-test/releases/download/demo-0.3.0/demo-0.3.0.tgz
     version: 0.3.0
-generated: "2019-11-23T15:54:25.91082456Z"
+generated: "2019-11-23T16:00:41.068961994Z"
