@@ -1,7 +1,7 @@
 {
   "name": "chart-testing",
   "version": "0.0.0",
-  "description": "kind GitHub action",
+  "description": "chart-releaser GitHub action",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -16,11 +16,7 @@
     "@actions/io": "^1.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.13",
     "@types/node": "^12.12.8",
-    "jest": "^24.8.0",
-    "jest-circus": "^24.7.1",
-    "ts-jest": "^24.0.2",
     "typescript": "^3.7.2"
   }
 }
