@@ -34,10 +34,15 @@ jobs:
         with:
           installLocalPathProvisioner: true
 
-      - name: Run chart-testing
+      - name: Run chart-testing (lint)
         uses: ./chart-testing
         with:
-          command: version
+          command: lint
+
+      - name: Run chart-testing (install)
+        uses: ./chart-testing
+        with:
+          command: install
 
       - name: Run chart-releaser
         uses: ./chart-releaser
