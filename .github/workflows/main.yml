@@ -11,35 +11,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Build kind action
-        working-directory: ./kind
-        run: |
-          npm install
-          npm run build
-
-      - name: Build chart-testing action
-        working-directory: ./chart-testing
-        run: |
-          npm install
-          npm run build
-
-      - name: Build chart-releaser action
-        working-directory: ./chart-releaser
-        run: |
-          npm install
-          npm run build
-
       - name: Create cluster
-        uses: ./kind
+        uses: unguiculus/kind-action@remove-typescript
         with:
           installLocalPathProvisioner: true
 
-      - name: Run chart-testing
-        uses: ./chart-testing
+      - name: Run chart-testing (lint)
+        uses: unguiculus/chart-testing-action@master
         with:
-          command: version
+          command: lint
+
+      - name: Run chart-testing (install)
+        uses: unguiculus/chart-testing-action@master
+        with:
+          command: install
 
       - name: Run chart-releaser
-        uses: ./chart-releaser
+        uses: unguiculus/chart-releaser-action@remove-typescript
         with:
+          owner: unguiculus
+          repo: actions-test
           token: "${{ secrets.GITHUB_TOKEN }}"
