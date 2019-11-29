@@ -1,8 +1,6 @@
 name: chart actions
 
-on:
-  pull_request:
-  push:
+on: pull_request
 
 jobs:
   test:
@@ -25,10 +23,3 @@ jobs:
         uses: unguiculus/chart-testing-action@master
         with:
           command: install
-
-      - name: Run chart-releaser
-        uses: unguiculus/chart-releaser-action@remove-typescript
-        with:
-          owner: unguiculus
-          repo: actions-test
-          token: "${{ secrets.GITHUB_TOKEN }}"
