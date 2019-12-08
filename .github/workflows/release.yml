@@ -15,12 +15,9 @@ jobs:
       - name: Configure Git
         run: |
           git config user.name "GitHub Actions"
-          git config user.email noreply@github.com
+          git config user.email unguiculus@users.noreply.github.com
 
       - name: Run chart-releaser
-        uses: unguiculus/chart-releaser-action@remove-typescript
+        uses: unguiculus/chart-releaser-action@master
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
-        with:
-          owner: unguiculus
-          repo: actions-test
