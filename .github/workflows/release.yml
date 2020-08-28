@@ -1,12 +1,14 @@
-name: chart actions
+name: release
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      version:
+        description: The version to release
+        required: true
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +20,6 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run chart-releaser
-        uses: unguiculus/chart-releaser-action@install-helm
-        env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+      - name: Release
+        run: |
+          echo "Releasing version: ${{ github.event.inputs.version }}"
